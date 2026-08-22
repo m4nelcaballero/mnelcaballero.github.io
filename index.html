@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -17,19 +19,24 @@
             color: black;
         }
 
+
         /* MENÚ */
+
         nav {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
             z-index: 1000;
         }
 
         nav a {
+            display: block;
             color: black;
             text-decoration: none;
             font-size: 13px;
-            margin-right: 18px;
+            margin-bottom: 10px;
             cursor: pointer;
         }
 
@@ -37,9 +44,11 @@
             text-decoration: underline;
         }
 
+
         /* CONTENIDO */
+
         main {
-            padding: 80px 20px 40px 20px;
+            padding: 150px 20px 40px 20px;
             max-width: 1000px;
             margin: 0 auto;
         }
@@ -52,14 +61,18 @@
             display: block;
         }
 
+
         /* DESCRIPCIÓN */
+
         #descripcion p {
             font-size: 16px;
             line-height: 1.6;
             max-width: 700px;
         }
 
+
         /* GALERÍAS */
+
         .galeria {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -73,43 +86,66 @@
             object-fit: cover;
         }
 
+
         /* MÓVIL */
+
         @media (max-width: 600px) {
+
             nav {
-                top: 15px;
-                left: 15px;
+                top: 20px;
             }
 
             nav a {
                 font-size: 12px;
-                margin-right: 10px;
+                margin-bottom: 8px;
             }
 
             main {
-                padding: 70px 15px 30px 15px;
+                padding: 140px 15px 30px 15px;
             }
 
             .galeria {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
     <!-- MENÚ -->
+
     <nav>
-        <a href="#" onclick="mostrarSeccion('descripcion')">descripción</a>
-        <a href="#" onclick="mostrarSeccion('fotografias')">fotografias</a>
-        <a href="#" onclick="mostrarSeccion('dibujoypintura')">dibujo y pintura</a>
+
+        <a href="#" onclick="mostrarSeccion('descripcion')">
+            descripción
+        </a>
+
+        <a href="#" onclick="mostrarSeccion('fotografias')">
+            fotografias
+        </a>
+
+        <a href="#" onclick="mostrarSeccion('dibujoypintura')">
+            dibujo y pintura
+        </a>
+
     </nav>
 
 
+
+    <!-- CONTENIDO -->
+
     <main>
 
+
         <!-- DESCRIPCIÓN -->
+
         <section id="descripcion" class="seccion activa">
 
             <p>
@@ -120,14 +156,19 @@
         </section>
 
 
+
         <!-- FOTOGRAFÍAS -->
+
         <section id="fotografias" class="seccion">
 
             <div class="galeria">
 
                 <!-- Añade tus fotografías aquí -->
+
                 <img src="fotografia1.jpg" alt="fotografía 1">
+
                 <img src="fotografia2.jpg" alt="fotografía 2">
+
                 <img src="fotografia3.jpg" alt="fotografía 3">
 
             </div>
@@ -135,36 +176,52 @@
         </section>
 
 
+
         <!-- DIBUJO Y PINTURA -->
+
         <section id="dibujoypintura" class="seccion">
 
             <div class="galeria">
 
                 <!-- Añade tus dibujos y pinturas aquí -->
+
                 <img src="dibujo1.jpg" alt="dibujo 1">
+
                 <img src="dibujo2.jpg" alt="dibujo 2">
+
                 <img src="pintura1.jpg" alt="pintura 1">
 
             </div>
 
         </section>
 
+
     </main>
 
 
+
+    <!-- FUNCIONAMIENTO DE LAS PESTAÑAS -->
+
     <script>
+
         function mostrarSeccion(seccion) {
 
             const secciones = document.querySelectorAll('.seccion');
 
             secciones.forEach(function(elemento) {
+
                 elemento.classList.remove('activa');
+
             });
 
             document.getElementById(seccion).classList.add('activa');
+
         }
+
     </script>
 
+
 </body>
+
 </html>
 ```
