@@ -35,7 +35,8 @@
             display: block;
             color: black;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 16px;
+            font-weight: bold;
             margin-bottom: 10px;
             cursor: pointer;
         }
@@ -71,19 +72,17 @@
         }
 
 
-        /* GALERÍAS */
+        /* GALERÍA */
 
         .galeria {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            width: 100%;
         }
 
         .galeria img {
+            display: block;
             width: 100%;
             height: auto;
-            display: block;
-            object-fit: cover;
+            margin-bottom: 30px;
         }
 
 
@@ -96,17 +95,16 @@
             }
 
             nav a {
-                font-size: 12px;
+                font-size: 15px;
                 margin-bottom: 8px;
             }
 
             main {
-                padding: 140px 15px 30px 15px;
+                padding: 140px 10px 30px 10px;
             }
 
-            .galeria {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+            .galeria img {
+                margin-bottom: 20px;
             }
 
         }
@@ -139,8 +137,6 @@
 
 
 
-    <!-- CONTENIDO -->
-
     <main>
 
 
@@ -163,13 +159,26 @@
 
             <div class="galeria">
 
-                <!-- Añade tus fotografías aquí -->
-
-                <img src="fotografia1.jpg" alt="fotografía 1">
-
-                <img src="fotografia2.jpg" alt="fotografía 2">
-
-                <img src="fotografia3.jpg" alt="fotografía 3">
+                <img src="fotografia1.jpg" alt="">
+                <img src="fotografia2.jpg" alt="">
+                <img src="fotografia3.jpg" alt="">
+                <img src="fotografia4.jpg" alt="">
+                <img src="fotografia5.jpg" alt="">
+                <img src="fotografia6.jpg" alt="">
+                <img src="fotografia7.jpg" alt="">
+                <img src="fotografia8.jpg" alt="">
+                <img src="fotografia9.jpg" alt="">
+                <img src="fotografia10.jpg" alt="">
+                <img src="fotografia11.jpg" alt="">
+                <img src="fotografia12.jpg" alt="">
+                <img src="fotografia13.jpg" alt="">
+                <img src="fotografia14.jpg" alt="">
+                <img src="fotografia15.jpg" alt="">
+                <img src="fotografia16.jpg" alt="">
+                <img src="fotografia17.jpg" alt="">
+                <img src="fotografia18.jpg" alt="">
+                <img src="fotografia19.jpg" alt="">
+                <img src="fotografia20.jpg" alt="">
 
             </div>
 
@@ -183,13 +192,26 @@
 
             <div class="galeria">
 
-                <!-- Añade tus dibujos y pinturas aquí -->
-
-                <img src="dibujo1.jpg" alt="dibujo 1">
-
-                <img src="dibujo2.jpg" alt="dibujo 2">
-
-                <img src="pintura1.jpg" alt="pintura 1">
+                <img src="dibujo1.jpg" alt="">
+                <img src="dibujo2.jpg" alt="">
+                <img src="dibujo3.jpg" alt="">
+                <img src="dibujo4.jpg" alt="">
+                <img src="dibujo5.jpg" alt="">
+                <img src="dibujo6.jpg" alt="">
+                <img src="dibujo7.jpg" alt="">
+                <img src="dibujo8.jpg" alt="">
+                <img src="dibujo9.jpg" alt="">
+                <img src="dibujo10.jpg" alt="">
+                <img src="dibujo11.jpg" alt="">
+                <img src="dibujo12.jpg" alt="">
+                <img src="dibujo13.jpg" alt="">
+                <img src="dibujo14.jpg" alt="">
+                <img src="dibujo15.jpg" alt="">
+                <img src="dibujo16.jpg" alt="">
+                <img src="dibujo17.jpg" alt="">
+                <img src="dibujo18.jpg" alt="">
+                <img src="dibujo19.jpg" alt="">
+                <img src="dibujo20.jpg" alt="">
 
             </div>
 
@@ -209,12 +231,12 @@
             const secciones = document.querySelectorAll('.seccion');
 
             secciones.forEach(function(elemento) {
-
                 elemento.classList.remove('activa');
-
             });
 
             document.getElementById(seccion).classList.add('activa');
+
+            window.scrollTo(0, 0);
 
         }
 
