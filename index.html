@@ -3,149 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DUCHAS PUNTO PRENDER</title>
 
     <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        body{
-            font-family:Arial, Helvetica, sans-serif;
-            background:#f4f4f4;
-            color:#333;
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: white;
+            color: black;
         }
 
-        header{
-            background:#000000;
-            color:white;
-            text-align:center;
-            padding:80px 20px;
+        /* MENÚ */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
         }
 
-        header h1{
-            font-size:60px;
-            margin-bottom:15px;
+        nav a {
+            color: black;
+            text-decoration: none;
+            font-size: 13px;
+            margin-right: 18px;
+            cursor: pointer;
         }
 
-        header p{
-            font-size:22px;
+        nav a:hover {
+            text-decoration: underline;
         }
 
-        nav{
-            background:#000000;
-            text-align:center;
-            padding:15px;
+        /* CONTENIDO */
+        main {
+            padding: 80px 20px 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        nav a{
-            color:white;
-            text-decoration:none;
-            margin:0 20px;
-            font-weight:bold;
+        .seccion {
+            display: none;
         }
 
-        nav a:hover{
-            text-decoration:underline;
+        .seccion.activa {
+            display: block;
         }
 
-        main{
-            max-width:1000px;
-            margin:60px auto;
-            padding:20px;
+        /* DESCRIPCIÓN */
+        #descripcion p {
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 700px;
         }
 
-        section{
-            margin-bottom:60px;
+        /* GALERÍAS */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
         }
 
-        h2{
-            margin-bottom:20px;
-            color:#000000;
+        .galeria img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
         }
 
-        .card{
-            background:white;
-            padding:25px;
-            border-radius:10px;
-            box-shadow:0 2px 10px rgba(0,0,0,.1);
-        }
+        /* MÓVIL */
+        @media (max-width: 600px) {
+            nav {
+                top: 15px;
+                left: 15px;
+            }
 
-        footer{
-            background:#222;
-            color:white;
-            text-align:center;
-            padding:30px;
-            margin-top:40px;
-        }
+            nav a {
+                font-size: 12px;
+                margin-right: 10px;
+            }
 
-        .boton{
-            display:inline-block;
-            margin-top:20px;
-            padding:12px 24px;
-            background:#2563eb;
-            color:white;
-            text-decoration:none;
-            border-radius:6px;
-        }
+            main {
+                padding: 70px 15px 30px 15px;
+            }
 
-        .boton:hover{
-            background:#1d4ed8;
+            .galeria {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
         }
     </style>
-
 </head>
+
 <body>
 
-<header>
-    <h1>DUCHAS PUNTO PRENDER</h1>
-    <p>ACOMPAÑAME A OTRO DÍA MÁS EN SEUL COREA DEL SUUURRR</p>
-</header>
+    <!-- MENÚ -->
+    <nav>
+        <a href="#" onclick="mostrarSeccion('descripcion')">descripción</a>
+        <a href="#" onclick="mostrarSeccion('fotografias')">fotografias</a>
+        <a href="#" onclick="mostrarSeccion('dibujoypintura')">dibujo y pintura</a>
+    </nav>
 
-<nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#sobre">Sobre mí</a>
-    <a href="#contacto">Contacto</a>
-</nav>
 
-<main>
+    <main>
 
-<section id="inicio">
-    <div class="card">
-        <h2>Inicio</h2>
-        <p>
-            Esta es una página de ejemplo creada con HTML y CSS.
-            Puedes modificar el contenido para adaptarlo a tus necesidades.
-        </p>
+        <!-- DESCRIPCIÓN -->
+        <section id="descripcion" class="seccion activa">
 
-        <a class="boton" href="#sobre">Más información</a>
-    </div>
-</section>
+            <p>
+                Escribe aquí el texto sobre ti y sobre tu proyecto.
+                Puedes escribir todo lo que quieras en este espacio.
+            </p>
 
-<section id="sobre">
-    <div class="card">
-        <h2>Sobre mí</h2>
-        <p>
-            Escribe aquí una breve descripción sobre ti, tu empresa o tu proyecto.
-        </p>
-    </div>
-</section>
+        </section>
 
-<section id="contacto">
-    <div class="card">
-        <h2>Contacto</h2>
-        <p>Email: ejemplo@email.com</p>
-        <p>Teléfono: +34 600 000 000</p>
-    </div>
-</section>
 
-</main>
+        <!-- FOTOGRAFÍAS -->
+        <section id="fotografias" class="seccion">
 
-<footer>
-    © 2026 Mi Página Web
-</footer>
+            <div class="galeria">
+
+                <!-- Añade tus fotografías aquí -->
+                <img src="fotografia1.jpg" alt="fotografía 1">
+                <img src="fotografia2.jpg" alt="fotografía 2">
+                <img src="fotografia3.jpg" alt="fotografía 3">
+
+            </div>
+
+        </section>
+
+
+        <!-- DIBUJO Y PINTURA -->
+        <section id="dibujoypintura" class="seccion">
+
+            <div class="galeria">
+
+                <!-- Añade tus dibujos y pinturas aquí -->
+                <img src="dibujo1.jpg" alt="dibujo 1">
+                <img src="dibujo2.jpg" alt="dibujo 2">
+                <img src="pintura1.jpg" alt="pintura 1">
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+        function mostrarSeccion(seccion) {
+
+            const secciones = document.querySelectorAll('.seccion');
+
+            secciones.forEach(function(elemento) {
+                elemento.classList.remove('activa');
+            });
+
+            document.getElementById(seccion).classList.add('activa');
+        }
+    </script>
 
 </body>
 </html>
+```
