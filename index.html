@@ -2,10 +2,20 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- GOOGLE FONT: MUKTA -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+
     <style>
+
+        /* CONFIGURACIÓN GENERAL */
 
         * {
             margin: 0;
@@ -14,9 +24,10 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: "Mukta", sans-serif;
             background: white;
             color: black;
+            font-weight: 400;
         }
 
 
@@ -35,8 +46,9 @@
             display: block;
             color: black;
             text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
+            font-family: "Mukta", sans-serif;
+            font-size: 18px;
+            font-weight: 700;
             margin-bottom: 10px;
             cursor: pointer;
         }
@@ -54,6 +66,9 @@
             margin: 0 auto;
         }
 
+
+        /* SECCIONES */
+
         .seccion {
             display: none;
         }
@@ -66,9 +81,11 @@
         /* DESCRIPCIÓN */
 
         #descripcion p {
-            font-size: 16px;
+            font-family: "Mukta", sans-serif;
+            font-size: 18px;
             line-height: 1.6;
             max-width: 700px;
+            font-weight: 400;
         }
 
 
@@ -89,7 +106,7 @@
         }
 
 
-        /* MÓVIL */
+        /* VERSIÓN MÓVIL */
 
         @media (max-width: 600px) {
 
@@ -100,7 +117,7 @@
             }
 
             nav a {
-                font-size: 14px;
+                font-size: 16px;
                 margin-bottom: 8px;
             }
 
@@ -143,6 +160,8 @@
     </nav>
 
 
+
+    <!-- CONTENIDO -->
 
     <main>
 
@@ -235,13 +254,15 @@
 
         function mostrarSeccion(seccion) {
 
-            const secciones = document.querySelectorAll('.seccion');
+            const secciones = document.querySelectorAll(".seccion");
 
             secciones.forEach(function(elemento) {
-                elemento.classList.remove('activa');
+
+                elemento.classList.remove("activa");
+
             });
 
-            document.getElementById(seccion).classList.add('activa');
+            document.getElementById(seccion).classList.add("activa");
 
             window.scrollTo(0, 0);
 
