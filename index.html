@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,6 +11,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 
@@ -106,7 +108,7 @@
         }
 
 
-        /* VERSIÓN MÓVIL */
+        /* MÓVIL */
 
         @media (max-width: 600px) {
 
@@ -145,15 +147,15 @@
 
     <nav>
 
-        <a href="#" onclick="mostrarSeccion('descripcion')">
+        <a href="#" onclick="mostrarSeccion('descripcion'); return false;">
             descripción
         </a>
 
-        <a href="#" onclick="mostrarSeccion('fotografias')">
+        <a href="#" onclick="mostrarSeccion('fotografias'); return false;">
             fotografias
         </a>
 
-        <a href="#" onclick="mostrarSeccion('dibujoypintura')">
+        <a href="#" onclick="mostrarSeccion('dibujoypintura'); return false;">
             dibujo y pintura
         </a>
 
@@ -257,15 +259,12 @@
             const secciones = document.querySelectorAll(".seccion");
 
             secciones.forEach(function(elemento) {
-
                 elemento.classList.remove("activa");
-
             });
 
             document.getElementById(seccion).classList.add("activa");
 
             window.scrollTo(0, 0);
-
         }
 
     </script>
