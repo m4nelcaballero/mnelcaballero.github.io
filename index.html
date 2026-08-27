@@ -16,7 +16,9 @@
 
     <style>
 
-        /* CONFIGURACIÓN GENERAL */
+        /* =====================================================
+           CONFIGURACIÓN GENERAL
+           ===================================================== */
 
         * {
             margin: 0;
@@ -32,7 +34,9 @@
         }
 
 
-        /* MENÚ */
+        /* =====================================================
+           MENÚ
+           ===================================================== */
 
         nav {
             position: fixed;
@@ -41,9 +45,6 @@
             width: 170px;
             text-align: center;
             z-index: 1000;
-            list-style: none;
-            padding: 0;
-            margin: 0;
         }
 
         nav a {
@@ -55,7 +56,6 @@
             font-weight: 700;
             margin-bottom: 8px;
             cursor: pointer;
-            list-style: none;
         }
 
         nav a:hover {
@@ -63,7 +63,9 @@
         }
 
 
-        /* CONTENIDO */
+        /* =====================================================
+           CONTENIDO
+           ===================================================== */
 
         main {
             padding: 80px 20px 40px 230px;
@@ -72,7 +74,9 @@
         }
 
 
-        /* SECCIONES */
+        /* =====================================================
+           SECCIONES
+           ===================================================== */
 
         .seccion {
             display: none;
@@ -83,7 +87,9 @@
         }
 
 
-        /* DESCRIPCIÓN */
+        /* =====================================================
+           DESCRIPCIÓN
+           ===================================================== */
 
         #descripcion p {
             font-family: "Archivo", sans-serif;
@@ -94,7 +100,9 @@
         }
 
 
-        /* GALERÍA */
+        /* =====================================================
+           GALERÍAS
+           ===================================================== */
 
         .galeria {
             width: 100%;
@@ -111,7 +119,97 @@
         }
 
 
-        /* MÓVIL */
+        /* =====================================================
+           JARDÍN
+           ===================================================== */
+
+        .jardin-contenedor {
+            width: 100%;
+        }
+
+
+        /*
+           CUADRÍCULA INVISIBLE 10 × 10
+
+           La cuadrícula existe para ordenar las plantas,
+           pero no tiene líneas ni bordes visibles.
+        */
+
+        .jardin {
+            width: min(700px, 100%);
+            aspect-ratio: 1 / 1;
+
+            display: grid;
+
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: repeat(10, 1fr);
+
+            margin: 0 auto;
+        }
+
+
+        /* CADA POSICIÓN */
+
+        .casilla-planta {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+
+        /* IMÁGENES */
+
+        .casilla-planta img {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            cursor: pointer;
+
+            transition: opacity 0.2s ease,
+                        transform 0.2s ease;
+        }
+
+
+        /* EFECTO AL PASAR EL CURSOR */
+
+        .casilla-planta img:hover {
+            opacity: 0.75;
+            transform: scale(0.96);
+        }
+
+
+        /* =====================================================
+           NOMBRE DE LA PLANTA
+           ===================================================== */
+
+        .nombre-planta {
+            height: 25px;
+
+            margin-top: 18px;
+
+            text-align: center;
+
+            font-family: "Archivo", sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+
+            opacity: 0;
+
+            transition: opacity 0.2s ease;
+        }
+
+        .nombre-planta.visible {
+            opacity: 1;
+        }
+
+
+        /* =====================================================
+           MÓVIL
+           ===================================================== */
 
         @media (max-width: 600px) {
 
@@ -122,7 +220,7 @@
             }
 
             nav a {
-                font-size: 16px;
+                font-size: 15px;
                 margin-bottom: 6px;
             }
 
@@ -136,6 +234,15 @@
                 margin-bottom: 10px;
             }
 
+            .jardin {
+                width: 100%;
+            }
+
+            .nombre-planta {
+                font-size: 14px;
+                margin-top: 15px;
+            }
+
         }
 
     </style>
@@ -146,7 +253,9 @@
 <body>
 
 
-    <!-- MENÚ -->
+    <!-- =====================================================
+         MENÚ
+         ===================================================== -->
 
     <nav>
 
@@ -166,16 +275,24 @@
             arquitectura
         </a>
 
+        <a href="#" onclick="mostrarSeccion('jardin'); return false;">
+            jardín
+        </a>
+
     </nav>
 
 
 
-    <!-- CONTENIDO -->
+    <!-- =====================================================
+         CONTENIDO
+         ===================================================== -->
 
     <main>
 
 
-        <!-- DESCRIPCIÓN -->
+        <!-- =================================================
+             DESCRIPCIÓN
+             ================================================= -->
 
         <section id="descripcion" class="seccion activa">
 
@@ -187,7 +304,9 @@
 
 
 
-        <!-- FOTOGRAFÍAS -->
+        <!-- =================================================
+             FOTOGRAFÍAS
+             ================================================= -->
 
         <section id="fotografias" class="seccion">
 
@@ -220,7 +339,9 @@
 
 
 
-        <!-- OBRA -->
+        <!-- =================================================
+             OBRA
+             ================================================= -->
 
         <section id="obra" class="seccion">
 
@@ -253,7 +374,9 @@
 
 
 
-        <!-- ARQUITECTURA -->
+        <!-- =================================================
+             ARQUITECTURA
+             ================================================= -->
 
         <section id="arquitectura" class="seccion">
 
@@ -285,13 +408,42 @@
         </section>
 
 
+
+        <!-- =================================================
+             JARDÍN
+             ================================================= -->
+
+        <section id="jardin" class="seccion">
+
+            <div class="jardin-contenedor">
+
+                <!-- CUADRÍCULA -->
+
+                <div id="jardin" class="jardin"></div>
+
+                <!-- NOMBRE DE LA PLANTA -->
+
+                <div id="nombrePlanta" class="nombre-planta"></div>
+
+            </div>
+
+        </section>
+
+
     </main>
 
 
 
-    <!-- FUNCIONAMIENTO DE LAS PESTAÑAS -->
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
 
     <script>
+
+
+        /* =================================================
+           CAMBIAR DE SECCIÓN
+           ================================================= */
 
         function mostrarSeccion(seccion) {
 
@@ -304,6 +456,322 @@
             document.getElementById(seccion).classList.add("activa");
 
             window.scrollTo(0, 0);
+
+        }
+
+
+
+        /* =================================================
+           PLANTAS DEL JARDÍN
+           =================================================
+
+           Aquí es donde puedes modificar tu jardín.
+
+           Cada planta tiene:
+
+           imagen  = nombre del archivo
+           nombre  = nombre que aparecerá abajo
+           fila    = posición vertical, del 1 al 10
+           columna = posición horizontal, del 1 al 10
+
+           Ejemplo:
+
+           {
+               imagen: "planta1.jpg",
+               nombre: "Romero",
+               fila: 3,
+               columna: 5
+           }
+
+        ================================================= */
+
+
+        const plantas = [
+
+            {
+                imagen: "planta1.jpg",
+                nombre: "Nombre de la planta 1",
+                fila: 2,
+                columna: 2
+            },
+
+            {
+                imagen: "planta2.jpg",
+                nombre: "Nombre de la planta 2",
+                fila: 2,
+                columna: 3
+            },
+
+            {
+                imagen: "planta3.jpg",
+                nombre: "Nombre de la planta 3",
+                fila: 3,
+                columna: 3
+            },
+
+            {
+                imagen: "planta4.jpg",
+                nombre: "Nombre de la planta 4",
+                fila: 3,
+                columna: 7
+            },
+
+            {
+                imagen: "planta5.jpg",
+                nombre: "Nombre de la planta 5",
+                fila: 4,
+                columna: 7
+            },
+
+            {
+                imagen: "planta6.jpg",
+                nombre: "Nombre de la planta 6",
+                fila: 4,
+                columna: 8
+            },
+
+            {
+                imagen: "planta7.jpg",
+                nombre: "Nombre de la planta 7",
+                fila: 5,
+                columna: 2
+            },
+
+            {
+                imagen: "planta8.jpg",
+                nombre: "Nombre de la planta 8",
+                fila: 5,
+                columna: 3
+            },
+
+            {
+                imagen: "planta9.jpg",
+                nombre: "Nombre de la planta 9",
+                fila: 5,
+                columna: 4
+            },
+
+            {
+                imagen: "planta10.jpg",
+                nombre: "Nombre de la planta 10",
+                fila: 5,
+                columna: 8
+            },
+
+            {
+                imagen: "planta11.jpg",
+                nombre: "Nombre de la planta 11",
+                fila: 6,
+                columna: 8
+            },
+
+            {
+                imagen: "planta12.jpg",
+                nombre: "Nombre de la planta 12",
+                fila: 6,
+                columna: 9
+            },
+
+            {
+                imagen: "planta13.jpg",
+                nombre: "Nombre de la planta 13",
+                fila: 7,
+                columna: 2
+            },
+
+            {
+                imagen: "planta14.jpg",
+                nombre: "Nombre de la planta 14",
+                fila: 7,
+                columna: 3
+            },
+
+            {
+                imagen: "planta15.jpg",
+                nombre: "Nombre de la planta 15",
+                fila: 7,
+                columna: 4
+            },
+
+            {
+                imagen: "planta16.jpg",
+                nombre: "Nombre de la planta 16",
+                fila: 7,
+                columna: 5
+            },
+
+            {
+                imagen: "planta17.jpg",
+                nombre: "Nombre de la planta 17",
+                fila: 8,
+                columna: 5
+            },
+
+            {
+                imagen: "planta18.jpg",
+                nombre: "Nombre de la planta 18",
+                fila: 8,
+                columna: 6
+            },
+
+            {
+                imagen: "planta19.jpg",
+                nombre: "Nombre de la planta 19",
+                fila: 8,
+                columna: 7
+            },
+
+            {
+                imagen: "planta20.jpg",
+                nombre: "Nombre de la planta 20",
+                fila: 8,
+                columna: 8
+            },
+
+            {
+                imagen: "planta21.jpg",
+                nombre: "Nombre de la planta 21",
+                fila: 9,
+                columna: 3
+            },
+
+            {
+                imagen: "planta22.jpg",
+                nombre: "Nombre de la planta 22",
+                fila: 9,
+                columna: 4
+            },
+
+            {
+                imagen: "planta23.jpg",
+                nombre: "Nombre de la planta 23",
+                fila: 9,
+                columna: 5
+            },
+
+            {
+                imagen: "planta24.jpg",
+                nombre: "Nombre de la planta 24",
+                fila: 9,
+                columna: 8
+            },
+
+            {
+                imagen: "planta25.jpg",
+                nombre: "Nombre de la planta 25",
+                fila: 10,
+                columna: 2
+            },
+
+            {
+                imagen: "planta26.jpg",
+                nombre: "Nombre de la planta 26",
+                fila: 10,
+                columna: 3
+            },
+
+            {
+                imagen: "planta27.jpg",
+                nombre: "Nombre de la planta 27",
+                fila: 10,
+                columna: 8
+            },
+
+            {
+                imagen: "planta28.jpg",
+                nombre: "Nombre de la planta 28",
+                fila: 10,
+                columna: 9
+            }
+
+        ];
+
+
+
+        /* =================================================
+           CREAR EL JARDÍN
+           ================================================= */
+
+        const jardin = document.getElementById("jardin");
+
+        const nombrePlanta = document.getElementById("nombrePlanta");
+
+
+        /*
+           Creamos las 100 posiciones.
+
+           Las que no tengan ninguna planta
+           permanecerán completamente vacías.
+        */
+
+        for (let fila = 1; fila <= 10; fila++) {
+
+            for (let columna = 1; columna <= 10; columna++) {
+
+
+                const casilla = document.createElement("div");
+
+                casilla.classList.add("casilla-planta");
+
+
+                /*
+                   Buscamos si existe una planta
+                   en esta posición.
+                */
+
+                const planta = plantas.find(function(item) {
+
+                    return item.fila === fila &&
+                           item.columna === columna;
+
+                });
+
+
+                /*
+                   Si existe una planta,
+                   colocamos su imagen.
+                */
+
+                if (planta) {
+
+                    const imagen = document.createElement("img");
+
+                    imagen.src = planta.imagen;
+
+                    imagen.alt = planta.nombre;
+
+                    imagen.dataset.nombre = planta.nombre;
+
+
+                    /* PASAR EL CURSOR */
+
+                    imagen.addEventListener("mouseenter", function() {
+
+                        nombrePlanta.textContent =
+                            imagen.dataset.nombre;
+
+                        nombrePlanta.classList.add("visible");
+
+                    });
+
+
+                    /* SACAR EL CURSOR */
+
+                    imagen.addEventListener("mouseleave", function() {
+
+                        nombrePlanta.classList.remove("visible");
+
+                    });
+
+
+                    casilla.appendChild(imagen);
+
+                }
+
+
+                jardin.appendChild(casilla);
+
+            }
 
         }
 
