@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -17,7 +17,7 @@
     <style>
 
         /* =====================================================
-           GENERAL
+           CONFIGURACIÓN GENERAL
            ===================================================== */
 
         * {
@@ -94,7 +94,7 @@
 
 
         /* =====================================================
-           MAIN
+           CONTENIDO
            ===================================================== */
 
         main {
@@ -202,21 +202,22 @@
 
 
         /* =====================================================
-           CONTENEDOR
+           CONTENEDOR DEL JARDÍN
            ===================================================== */
 
         .jardin-contenedor {
 
             /*
-               Dejamos únicamente un pequeño espacio
-               para el nombre debajo.
+               El jardín utiliza el máximo espacio posible
+               sin salirse de la pantalla.
 
-               El resto de la pantalla pertenece al jardín.
+               Dejamos espacio para el menú lateral
+               y un pequeño margen superior/inferior.
             */
 
             width: min(
                 calc(100vw - 260px),
-                calc(100vh - 120px)
+                calc(100vh - 110px)
             );
 
             aspect-ratio: 1 / 1;
@@ -241,23 +242,21 @@
             display: grid;
 
             /*
-               10 × 10
-
-               Exactamente 100 casillas.
+               EXACTAMENTE 10 COLUMNAS
             */
 
             grid-template-columns:
                 repeat(10, 1fr);
 
+            /*
+               EXACTAMENTE 10 FILAS
+            */
+
             grid-template-rows:
                 repeat(10, 1fr);
 
             /*
-               IMPORTANTE:
-
-               Sin gap.
-
-               Las imágenes quedan juntas.
+               SIN ESPACIO ENTRE IMÁGENES
             */
 
             gap: 0;
@@ -288,15 +287,23 @@
 
 
         /* =====================================================
-           IMAGEN
+           IMÁGENES
            ===================================================== */
 
         .casilla-planta img {
 
             /*
-               TODAS LAS IMÁGENES SON CUADRADAS.
+               TODAS LAS IMÁGENES OCUPAN UN CUADRADO.
 
-               No importa el tamaño original del archivo.
+               No importa si el archivo original es:
+
+               - horizontal
+               - vertical
+               - cuadrado
+               - muy grande
+               - muy pequeño
+
+               El navegador lo adapta.
             */
 
             display: block;
@@ -305,26 +312,17 @@
             height: 100%;
 
             /*
-               Recorta la fotografía para llenar
-               completamente el cuadrado.
+               RECORTA LA IMAGEN PARA QUE SEA CUADRADA
             */
 
             object-fit: cover;
 
             object-position: center center;
 
-            /*
-               Elimina cualquier espacio.
-            */
-
             margin: 0;
             padding: 0;
 
             cursor: pointer;
-
-            /*
-               Transición muy pequeña.
-            */
 
             transition:
                 opacity 0.15s ease,
@@ -333,7 +331,7 @@
 
 
         /* =====================================================
-           HOVER
+           HOVER DE LAS IMÁGENES
            ===================================================== */
 
         .casilla-planta img:hover {
@@ -345,7 +343,7 @@
 
 
         /* =====================================================
-           NOMBRE
+           NOMBRE DE LA PLANTA
            ===================================================== */
 
         .nombre-planta {
@@ -353,15 +351,14 @@
             /*
                El nombre está fuera de la cuadrícula.
 
-               Su posición es ABSOLUTA para que nunca
-               modifique el tamaño ni la posición del jardín.
+               Es ABSOLUTO para que no mueva el jardín.
             */
 
             position: absolute;
 
             left: 0;
 
-            top: calc(100% + 12px);
+            top: calc(100% + 10px);
 
             width: 100%;
 
@@ -433,7 +430,7 @@
 
                 width: min(
                     calc(100vw - 20px),
-                    calc(100vh - 150px)
+                    calc(100vh - 145px)
                 );
             }
 
@@ -618,6 +615,7 @@
 
             <div class="jardin-contenedor">
 
+
                 <!-- =================================================
                      CUADRÍCULA 10 × 10
                      ================================================= -->
@@ -629,13 +627,14 @@
 
 
                 <!-- =================================================
-                     NOMBRE
+                     NOMBRE DE LA PLANTA
                      ================================================= -->
 
                 <div
                     id="nombrePlanta"
                     class="nombre-planta">
                 </div>
+
 
             </div>
 
@@ -682,11 +681,28 @@
 
 
         /* =================================================
-           PLANTAS
+           PLANTAS DEL JARDÍN
            =================================================
 
-           MANTENEMOS TODOS TUS ARCHIVOS,
-           NOMBRES Y POSICIONES.
+           IMPORTANTE:
+
+           Las coordenadas funcionan así:
+
+                 10   10   10   10
+                  ↑
+                  │
+                  │
+                  │
+                  1
+
+           (1,1)  = ABAJO A LA IZQUIERDA
+
+           (1,10) = ABAJO A LA DERECHA
+
+           (10,1) = ARRIBA A LA IZQUIERDA
+
+           (10,10)= ARRIBA A LA DERECHA
+
         ================================================= */
 
 
@@ -893,7 +909,7 @@
 
 
         /* =================================================
-           CREAR JARDÍN
+           CREAR LA CUADRÍCULA
            ================================================= */
 
         const jardinGrid =
@@ -906,15 +922,39 @@
 
         /*
            =================================================
-           CREAR LAS 100 CASILLAS
+           IMPORTANTE
+
+           Creamos las filas en este orden:
+
+           10
+           9
+           8
+           7
+           6
+           5
+           4
+           3
+           2
+           1
+
+           Por eso la fila 1 termina visualmente abajo.
            =================================================
         */
 
+
         for (
-            let fila = 1;
-            fila <= 10;
-            fila++
+            let fila = 10;
+            fila >= 1;
+            fila--
         ) {
+
+
+            /*
+               Columnas:
+
+               1 → izquierda
+               10 → derecha
+            */
 
             for (
                 let columna = 1;
@@ -923,9 +963,9 @@
             ) {
 
 
-                /*
+                /* =========================================
                    CREAR CASILLA
-                */
+                   ========================================= */
 
                 const casilla =
                     document.createElement("div");
@@ -936,9 +976,9 @@
                 );
 
 
-                /*
+                /* =========================================
                    BUSCAR PLANTA
-                */
+                   ========================================= */
 
                 const planta =
                     plantas.find(function(item) {
@@ -951,9 +991,9 @@
                     });
 
 
-                /*
-                   SI EXISTE PLANTA
-                */
+                /* =========================================
+                   SI EXISTE UNA PLANTA
+                   ========================================= */
 
                 if (planta) {
 
@@ -967,7 +1007,14 @@
 
 
                     /*
-                       ARCHIVO ORIGINAL
+                       ARCHIVO DE IMAGEN
+
+                       Ejemplo:
+
+                       planta1.jpg
+                       planta2.jpg
+                       planta3.jpg
+                       etc.
                     */
 
                     imagen.src =
@@ -975,7 +1022,7 @@
 
 
                     /*
-                       NOMBRE
+                       TEXTO ALTERNATIVO
                     */
 
                     imagen.alt =
@@ -984,7 +1031,7 @@
 
                     /*
                        =====================================
-                       AL PASAR EL CURSOR
+                       PASAR EL CURSOR ENCIMA
                        =====================================
                     */
 
@@ -992,14 +1039,8 @@
                         "mouseenter",
                         function() {
 
-
-                            /*
-                               MOSTRAR NOMBRE
-                            */
-
                             nombrePlanta.textContent =
                                 planta.nombre;
-
 
                             nombrePlanta.classList.add(
                                 "visible"
@@ -1011,14 +1052,13 @@
 
                     /*
                        =====================================
-                       AL SALIR
+                       SACAR EL CURSOR
                        =====================================
                     */
 
                     imagen.addEventListener(
                         "mouseleave",
                         function() {
-
 
                             nombrePlanta.classList.remove(
                                 "visible"
@@ -1029,7 +1069,9 @@
 
 
                     /*
+                       =====================================
                        AÑADIR IMAGEN
+                       =====================================
                     */
 
                     casilla.appendChild(
@@ -1040,7 +1082,9 @@
 
 
                 /*
+                   =========================================
                    AÑADIR CASILLA
+                   =========================================
                 */
 
                 jardinGrid.appendChild(
@@ -1057,4 +1101,4 @@
 
 </body>
 
-</html>         
+</html>
