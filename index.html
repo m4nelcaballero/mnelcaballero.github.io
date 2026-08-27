@@ -26,11 +26,18 @@
             box-sizing: border-box;
         }
 
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
         body {
             font-family: "Archivo", sans-serif;
             background: white;
             color: black;
             font-weight: 400;
+            overflow: hidden;
         }
 
 
@@ -68,8 +75,11 @@
            ===================================================== */
 
         main {
-            padding: 80px 20px 40px 230px;
-            max-width: 1100px;
+            width: 100%;
+            height: 100vh;
+
+            padding: 80px 20px 30px 230px;
+
             margin: 0 auto;
         }
 
@@ -123,20 +133,52 @@
            JARDÍN
            ===================================================== */
 
-        .jardin-contenedor {
+        #jardin {
             width: 100%;
+            height: calc(100vh - 110px);
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
         }
 
 
-        /*
-           CUADRÍCULA INVISIBLE 10 × 10
+        /* =====================================================
+           CONTENEDOR DEL JARDÍN
+           ===================================================== */
 
-           La cuadrícula existe para ordenar las plantas,
-           pero no tiene líneas ni bordes visibles.
-        */
+        .jardin-contenedor {
 
-        .jardin {
-            width: min(700px, 100%);
+            /*
+               El jardín se adapta a la pantalla.
+
+               No supera el 70% de la altura disponible
+               para dejar espacio al nombre debajo.
+            */
+
+            width: min(
+                calc(100vw - 270px),
+                calc((100vh - 160px) * 0.90)
+            );
+
+            aspect-ratio: 1 / 1;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+        }
+
+
+        /* =====================================================
+           CUADRÍCULA 10 × 10
+           ===================================================== */
+
+        .jardin-grid {
+
+            width: 100%;
             aspect-ratio: 1 / 1;
 
             display: grid;
@@ -144,41 +186,71 @@
             grid-template-columns: repeat(10, 1fr);
             grid-template-rows: repeat(10, 1fr);
 
-            margin: 0 auto;
+            position: relative;
         }
 
 
-        /* CADA POSICIÓN */
+        /* =====================================================
+           CASILLAS
+           ===================================================== */
 
         .casilla-planta {
+
             width: 100%;
             height: 100%;
-            overflow: hidden;
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            overflow: visible;
         }
 
 
-        /* IMÁGENES */
+        /* =====================================================
+           IMÁGENES
+           ===================================================== */
 
         .casilla-planta img {
+
             display: block;
 
-            width: 100%;
-            height: 100%;
+            /*
+               Las imágenes son pequeñas.
+
+               Al estar dentro de una cuadrícula 10×10,
+               se verá todo el jardín de una vez.
+            */
+
+            width: 82%;
+            height: 82%;
 
             object-fit: cover;
 
             cursor: pointer;
 
-            transition: opacity 0.2s ease,
-                        transform 0.2s ease;
+            position: relative;
+
+            z-index: 1;
+
+            transition:
+                transform 0.25s ease,
+                opacity 0.25s ease;
         }
 
 
-        /* EFECTO AL PASAR EL CURSOR */
+        /* =====================================================
+           HOVER
+           ===================================================== */
 
         .casilla-planta img:hover {
-            opacity: 0.75;
-            transform: scale(0.96);
+
+            opacity: 0.65;
+
+            z-index: 20;
         }
 
 
@@ -187,23 +259,40 @@
            ===================================================== */
 
         .nombre-planta {
-            height: 25px;
+
+            /*
+               Reservamos siempre este espacio.
+
+               Así la cuadrícula NO se mueve cuando aparece
+               el nombre.
+            */
+
+            width: 100%;
+
+            height: 28px;
 
             margin-top: 18px;
 
             text-align: center;
 
             font-family: "Archivo", sans-serif;
+
             font-size: 16px;
+
             font-weight: 400;
+
+            line-height: 28px;
 
             opacity: 0;
 
             transition: opacity 0.2s ease;
         }
 
+
         .nombre-planta.visible {
+
             opacity: 1;
+
         }
 
 
@@ -213,34 +302,76 @@
 
         @media (max-width: 600px) {
 
-            nav {
-                top: 20px;
-                left: 15px;
-                width: 140px;
+            body {
+                overflow: hidden;
             }
+
+
+            nav {
+
+                top: 20px;
+
+                left: 15px;
+
+                width: 140px;
+
+            }
+
 
             nav a {
+
                 font-size: 15px;
+
                 margin-bottom: 6px;
+
             }
+
 
             main {
-                padding: 120px 15px 30px 15px;
+
+                padding:
+                    120px
+                    15px
+                    20px
+                    15px;
+
             }
 
-            .galeria img {
-                max-width: 100%;
-                max-height: none;
-                margin-bottom: 10px;
+
+            #jardin {
+
+                height:
+                    calc(100vh - 140px);
+
             }
 
-            .jardin {
-                width: 100%;
+
+            .jardin-contenedor {
+
+                width:
+                    min(
+                        calc(100vw - 30px),
+                        calc((100vh - 190px) * 0.90)
+                    );
+
             }
+
+
+            .casilla-planta img {
+
+                width: 80%;
+
+                height: 80%;
+
+            }
+
 
             .nombre-planta {
+
                 font-size: 14px;
-                margin-top: 15px;
+
+                margin-top: 12px;
+
             }
 
         }
@@ -417,13 +548,23 @@
 
             <div class="jardin-contenedor">
 
-                <!-- CUADRÍCULA -->
 
-                <div id="jardin" class="jardin"></div>
+                <!-- =================================================
+                     CUADRÍCULA 10 × 10
+                     ================================================= -->
 
-                <!-- NOMBRE DE LA PLANTA -->
+                <div id="jardinGrid" class="jardin-grid"></div>
 
-                <div id="nombrePlanta" class="nombre-planta"></div>
+
+                <!-- =================================================
+                     NOMBRE
+                     ================================================= -->
+
+                <div
+                    id="nombrePlanta"
+                    class="nombre-planta">
+                </div>
+
 
             </div>
 
@@ -447,13 +588,21 @@
 
         function mostrarSeccion(seccion) {
 
-            const secciones = document.querySelectorAll(".seccion");
+            const secciones =
+                document.querySelectorAll(".seccion");
+
 
             secciones.forEach(function(elemento) {
+
                 elemento.classList.remove("activa");
+
             });
 
-            document.getElementById(seccion).classList.add("activa");
+
+            document
+                .getElementById(seccion)
+                .classList.add("activa");
+
 
             window.scrollTo(0, 0);
 
@@ -465,23 +614,12 @@
            PLANTAS DEL JARDÍN
            =================================================
 
-           Aquí es donde puedes modificar tu jardín.
+           MANTENEMOS EXACTAMENTE:
 
-           Cada planta tiene:
-
-           imagen  = nombre del archivo
-           nombre  = nombre que aparecerá abajo
-           fila    = posición vertical, del 1 al 10
-           columna = posición horizontal, del 1 al 10
-
-           Ejemplo:
-
-           {
-               imagen: "planta1.jpg",
-               nombre: "Romero",
-               fila: 3,
-               columna: 5
-           }
+           - nombres de imágenes
+           - nombres de plantas
+           - filas
+           - columnas
 
         ================================================= */
 
@@ -689,87 +827,254 @@
 
 
         /* =================================================
-           CREAR EL JARDÍN
+           CREAR JARDÍN
            ================================================= */
 
-        const jardin = document.getElementById("jardin");
+        const jardinGrid =
+            document.getElementById("jardinGrid");
 
-        const nombrePlanta = document.getElementById("nombrePlanta");
+
+        const nombrePlanta =
+            document.getElementById("nombrePlanta");
 
 
         /*
-           Creamos las 100 posiciones.
-
-           Las que no tengan ninguna planta
-           permanecerán completamente vacías.
+           Creamos exactamente 100 casillas:
+           10 filas × 10 columnas.
         */
 
-        for (let fila = 1; fila <= 10; fila++) {
+        for (
+            let fila = 1;
+            fila <= 10;
+            fila++
+        ) {
 
-            for (let columna = 1; columna <= 10; columna++) {
+            for (
+                let columna = 1;
+                columna <= 10;
+                columna++
+            ) {
 
 
-                const casilla = document.createElement("div");
+                /* CREAR CASILLA */
 
-                casilla.classList.add("casilla-planta");
+                const casilla =
+                    document.createElement("div");
+
+
+                casilla.classList.add(
+                    "casilla-planta"
+                );
 
 
                 /*
-                   Buscamos si existe una planta
-                   en esta posición.
+                   BUSCAR PLANTA
                 */
 
-                const planta = plantas.find(function(item) {
+                const planta =
+                    plantas.find(function(item) {
 
-                    return item.fila === fila &&
-                           item.columna === columna;
+                        return (
+                            item.fila === fila &&
+                            item.columna === columna
+                        );
 
-                });
+                    });
 
 
                 /*
-                   Si existe una planta,
-                   colocamos su imagen.
+                   SI EXISTE UNA PLANTA
                 */
 
                 if (planta) {
 
-                    const imagen = document.createElement("img");
 
-                    imagen.src = planta.imagen;
+                    /* CREAR IMAGEN */
 
-                    imagen.alt = planta.nombre;
-
-                    imagen.dataset.nombre = planta.nombre;
+                    const imagen =
+                        document.createElement("img");
 
 
-                    /* PASAR EL CURSOR */
-
-                    imagen.addEventListener("mouseenter", function() {
-
-                        nombrePlanta.textContent =
-                            imagen.dataset.nombre;
-
-                        nombrePlanta.classList.add("visible");
-
-                    });
+                    imagen.src =
+                        planta.imagen;
 
 
-                    /* SACAR EL CURSOR */
-
-                    imagen.addEventListener("mouseleave", function() {
-
-                        nombrePlanta.classList.remove("visible");
-
-                    });
+                    imagen.alt =
+                        planta.nombre;
 
 
-                    casilla.appendChild(imagen);
+                    /*
+                       =================================================
+                       COMPOSICIÓN NATURAL
+                       =================================================
+
+                       Pequeños desplazamientos para evitar
+                       que todas las fotografías parezcan
+                       perfectamente alineadas.
+                    */
+
+
+                    const desplazamientoX =
+                        (Math.random() * 10) - 5;
+
+
+                    const desplazamientoY =
+                        (Math.random() * 10) - 5;
+
+
+                    const escala =
+                        0.80 +
+                        (Math.random() * 0.16);
+
+
+                    const rotacion =
+                        (Math.random() * 4) - 2;
+
+
+                    /*
+                       GUARDAR VALORES
+                    */
+
+                    imagen.dataset.x =
+                        desplazamientoX;
+
+                    imagen.dataset.y =
+                        desplazamientoY;
+
+                    imagen.dataset.escala =
+                        escala;
+
+                    imagen.dataset.rotacion =
+                        rotacion;
+
+
+                    /*
+                       POSICIÓN INICIAL
+                    */
+
+                    imagen.style.transform =
+                        `
+                        translate(
+                            ${desplazamientoX}px,
+                            ${desplazamientoY}px
+                        )
+                        scale(${escala})
+                        rotate(${rotacion}deg)
+                        `;
+
+
+                    /*
+                       =================================================
+                       ENTRAR CON EL CURSOR
+                       =================================================
+                    */
+
+                    imagen.addEventListener(
+                        "mouseenter",
+                        function() {
+
+
+                            /*
+                               MOSTRAR NOMBRE
+                            */
+
+                            nombrePlanta.textContent =
+                                planta.nombre;
+
+
+                            nombrePlanta.classList.add(
+                                "visible"
+                            );
+
+
+                            /*
+                               AMPLIAR LIGERAMENTE
+                            */
+
+                            const escalaHover =
+                                parseFloat(
+                                    imagen.dataset.escala
+                                ) + 0.10;
+
+
+                            imagen.style.transform =
+                                `
+                                translate(
+                                    ${imagen.dataset.x}px,
+                                    ${imagen.dataset.y}px
+                                )
+                                scale(${escalaHover})
+                                rotate(${imagen.dataset.rotacion}deg)
+                                `;
+
+
+                            imagen.style.zIndex =
+                                "20";
+
+                        }
+                    );
+
+
+                    /*
+                       =================================================
+                       SALIR CON EL CURSOR
+                       =================================================
+                    */
+
+                    imagen.addEventListener(
+                        "mouseleave",
+                        function() {
+
+
+                            /*
+                               OCULTAR NOMBRE
+                            */
+
+                            nombrePlanta.classList.remove(
+                                "visible"
+                            );
+
+
+                            /*
+                               VOLVER A SU ESTADO
+                            */
+
+                            imagen.style.transform =
+                                `
+                                translate(
+                                    ${imagen.dataset.x}px,
+                                    ${imagen.dataset.y}px
+                                )
+                                scale(${imagen.dataset.escala})
+                                rotate(${imagen.dataset.rotacion}deg)
+                                `;
+
+
+                            imagen.style.zIndex =
+                                "1";
+
+                        }
+                    );
+
+
+                    /*
+                       AÑADIR IMAGEN
+                    */
+
+                    casilla.appendChild(
+                        imagen
+                    );
 
                 }
 
 
-                jardin.appendChild(casilla);
+                /*
+                   AÑADIR CASILLA
+                */
+
+                jardinGrid.appendChild(
+                    casilla
+                );
 
             }
 
