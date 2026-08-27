@@ -17,7 +17,7 @@
     <style>
 
         /* =====================================================
-           CONFIGURACIÓN GENERAL
+           GENERAL
            ===================================================== */
 
         * {
@@ -28,17 +28,24 @@
 
         html,
         body {
+
             width: 100%;
             height: 100%;
+
             margin: 0;
             padding: 0;
+
             overflow: hidden;
         }
 
         body {
+
             font-family: "Archivo", sans-serif;
+
             background: white;
+
             color: black;
+
             font-weight: 400;
         }
 
@@ -48,9 +55,12 @@
            ===================================================== */
 
         nav {
+
             position: fixed;
+
             top: 30px;
             left: 30px;
+
             width: 170px;
 
             text-align: center;
@@ -59,13 +69,17 @@
         }
 
         nav a {
+
             display: block;
 
             color: black;
+
             text-decoration: none;
 
             font-family: "Archivo", sans-serif;
+
             font-size: 16px;
+
             font-weight: 700;
 
             margin-bottom: 8px;
@@ -74,19 +88,27 @@
         }
 
         nav a:hover {
+
             text-decoration: underline;
         }
 
 
         /* =====================================================
-           CONTENIDO GENERAL
+           MAIN
            ===================================================== */
 
         main {
+
             width: 100%;
             height: 100vh;
 
-            padding: 80px 20px 30px 230px;
+            padding-top: 70px;
+
+            padding-right: 20px;
+
+            padding-bottom: 20px;
+
+            padding-left: 230px;
 
             overflow: hidden;
         }
@@ -97,13 +119,17 @@
            ===================================================== */
 
         .seccion {
+
             display: none;
 
             width: 100%;
             height: 100%;
+
+            overflow: hidden;
         }
 
         .seccion.activa {
+
             display: block;
         }
 
@@ -113,9 +139,11 @@
            ===================================================== */
 
         #descripcion p {
+
             font-family: "Archivo", sans-serif;
 
             font-size: 16px;
+
             line-height: 1.5;
 
             max-width: 700px;
@@ -129,21 +157,24 @@
            ===================================================== */
 
         .galeria {
+
             width: 100%;
 
-            text-align: center;
-
             height: 100%;
+
+            text-align: center;
 
             overflow: hidden;
         }
 
         .galeria img {
+
             display: block;
 
             width: auto;
 
             max-width: 650px;
+
             max-height: 80vh;
 
             height: auto;
@@ -157,6 +188,7 @@
            ===================================================== */
 
         #jardin {
+
             width: 100%;
             height: 100%;
 
@@ -170,38 +202,26 @@
 
 
         /* =====================================================
-           CONTENEDOR DEL JARDÍN
+           CONTENEDOR
            ===================================================== */
 
         .jardin-contenedor {
 
             /*
-               El tamaño se calcula automáticamente.
+               Dejamos únicamente un pequeño espacio
+               para el nombre debajo.
 
-               El jardín nunca será más ancho que el espacio
-               disponible y tampoco más alto que la pantalla.
-
-               Dejamos espacio para:
-
-               - menú lateral
-               - nombre de la planta
-               - márgenes
+               El resto de la pantalla pertenece al jardín.
             */
 
             width: min(
-                calc(100vw - 280px),
-                calc(100vh - 150px)
+                calc(100vw - 260px),
+                calc(100vh - 120px)
             );
 
             aspect-ratio: 1 / 1;
 
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: flex-start;
+            position: relative;
 
             flex-shrink: 1;
 
@@ -216,18 +236,14 @@
         .jardin-grid {
 
             width: 100%;
-
-            aspect-ratio: 1 / 1;
+            height: 100%;
 
             display: grid;
 
             /*
-               EXACTAMENTE:
+               10 × 10
 
-               10 columnas
-               10 filas
-
-               = 100 casillas
+               Exactamente 100 casillas.
             */
 
             grid-template-columns:
@@ -236,14 +252,22 @@
             grid-template-rows:
                 repeat(10, 1fr);
 
-            position: relative;
+            /*
+               IMPORTANTE:
 
-            flex-shrink: 1;
+               Sin gap.
+
+               Las imágenes quedan juntas.
+            */
+
+            gap: 0;
+
+            position: relative;
         }
 
 
         /* =====================================================
-           CASILLAS
+           CASILLA
            ===================================================== */
 
         .casilla-planta {
@@ -251,28 +275,28 @@
             width: 100%;
             height: 100%;
 
+            min-width: 0;
+            min-height: 0;
+
             position: relative;
 
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
             overflow: hidden;
+
+            padding: 0;
+            margin: 0;
         }
 
 
         /* =====================================================
-           IMÁGENES
+           IMAGEN
            ===================================================== */
 
         .casilla-planta img {
 
             /*
-               La imagen ocupa la casilla.
+               TODAS LAS IMÁGENES SON CUADRADAS.
 
-               El navegador adapta automáticamente cualquier
-               fotografía a un cuadrado.
+               No importa el tamaño original del archivo.
             */
 
             display: block;
@@ -281,80 +305,77 @@
             height: 100%;
 
             /*
-               COVER hace que todas las imágenes tengan
-               exactamente el mismo tamaño cuadrado.
-
-               Si una fotografía es horizontal o vertical,
-               se recorta automáticamente.
+               Recorta la fotografía para llenar
+               completamente el cuadrado.
             */
 
             object-fit: cover;
 
+            object-position: center center;
+
             /*
-               Centro del recorte.
+               Elimina cualquier espacio.
             */
 
-            object-position: center center;
+            margin: 0;
+            padding: 0;
 
             cursor: pointer;
 
             /*
-               Pequeña transición al pasar el cursor.
+               Transición muy pequeña.
             */
 
             transition:
-                opacity 0.2s ease,
-                transform 0.2s ease;
-
-            /*
-               Evita que la imagen pueda deformarse.
-            */
-
-            max-width: none;
-            max-height: none;
+                opacity 0.15s ease,
+                transform 0.15s ease;
         }
 
 
         /* =====================================================
-           HOVER DE LAS IMÁGENES
+           HOVER
            ===================================================== */
 
         .casilla-planta img:hover {
 
-            opacity: 0.70;
+            opacity: 0.65;
 
-            transform: scale(0.96);
+            transform: scale(0.94);
         }
 
 
         /* =====================================================
-           NOMBRE DE LA PLANTA
+           NOMBRE
            ===================================================== */
 
         .nombre-planta {
 
             /*
-               Reservamos espacio permanente.
+               El nombre está fuera de la cuadrícula.
 
-               Así el jardín NO se mueve cuando aparece
-               el nombre.
+               Su posición es ABSOLUTA para que nunca
+               modifique el tamaño ni la posición del jardín.
             */
+
+            position: absolute;
+
+            left: 0;
+
+            top: calc(100% + 12px);
 
             width: 100%;
 
-            height: 28px;
-
-            margin-top: 18px;
+            height: 20px;
 
             text-align: center;
 
             font-family: "Archivo", sans-serif;
 
-            font-size: 16px;
+            font-size: 15px;
 
             font-weight: 400;
 
-            line-height: 28px;
+            line-height: 20px;
 
             white-space: nowrap;
 
@@ -364,10 +385,13 @@
 
             opacity: 0;
 
-            transition: opacity 0.2s ease;
+            pointer-events: none;
+
+            transition: opacity 0.15s ease;
         }
 
         .nombre-planta.visible {
+
             opacity: 1;
         }
 
@@ -380,54 +404,44 @@
 
             nav {
 
-                top: 20px;
-                left: 15px;
+                top: 15px;
 
-                width: 140px;
+                left: 10px;
+
+                width: 130px;
             }
 
             nav a {
 
-                font-size: 15px;
+                font-size: 14px;
 
-                margin-bottom: 6px;
+                margin-bottom: 5px;
             }
 
             main {
 
-                padding:
-                    120px
-                    15px
-                    15px
-                    15px;
-            }
+                padding-top: 105px;
 
-            #jardin {
+                padding-right: 10px;
 
-                width: 100%;
-                height: 100%;
+                padding-bottom: 10px;
+
+                padding-left: 10px;
             }
 
             .jardin-contenedor {
 
-                /*
-                   En móvil utilizamos prácticamente
-                   todo el ancho disponible.
-
-                   También se limita por la altura.
-                */
-
                 width: min(
-                    calc(100vw - 30px),
-                    calc(100vh - 180px)
+                    calc(100vw - 20px),
+                    calc(100vh - 150px)
                 );
             }
 
             .nombre-planta {
 
-                font-size: 14px;
+                font-size: 13px;
 
-                margin-top: 12px;
+                top: calc(100% + 8px);
             }
 
         }
@@ -604,7 +618,6 @@
 
             <div class="jardin-contenedor">
 
-
                 <!-- =================================================
                      CUADRÍCULA 10 × 10
                      ================================================= -->
@@ -616,14 +629,13 @@
 
 
                 <!-- =================================================
-                     NOMBRE DE LA PLANTA
+                     NOMBRE
                      ================================================= -->
 
                 <div
                     id="nombrePlanta"
                     class="nombre-planta">
                 </div>
-
 
             </div>
 
@@ -663,13 +675,6 @@
                 .classList.add("activa");
 
 
-            /*
-               Volvemos arriba.
-
-               Como el body tiene overflow:hidden,
-               no se genera scroll.
-            */
-
             window.scrollTo(0, 0);
 
         }
@@ -677,14 +682,11 @@
 
 
         /* =================================================
-           PLANTAS DEL JARDÍN
+           PLANTAS
            =================================================
 
-           MANTENEMOS TUS DATOS EXACTAMENTE.
-
-           Solo se intentarán mostrar las imágenes
-           que estén indicadas aquí.
-
+           MANTENEMOS TODOS TUS ARCHIVOS,
+           NOMBRES Y POSICIONES.
         ================================================= */
 
 
@@ -891,7 +893,7 @@
 
 
         /* =================================================
-           CREAR EL JARDÍN
+           CREAR JARDÍN
            ================================================= */
 
         const jardinGrid =
@@ -906,10 +908,6 @@
            =================================================
            CREAR LAS 100 CASILLAS
            =================================================
-
-           10 filas × 10 columnas.
-
-           Las casillas sin planta quedan vacías.
         */
 
         for (
@@ -925,9 +923,9 @@
             ) {
 
 
-                /* =========================================
+                /*
                    CREAR CASILLA
-                   ========================================= */
+                */
 
                 const casilla =
                     document.createElement("div");
@@ -938,9 +936,9 @@
                 );
 
 
-                /* =========================================
+                /*
                    BUSCAR PLANTA
-                   ========================================= */
+                */
 
                 const planta =
                     plantas.find(function(item) {
@@ -954,9 +952,7 @@
 
 
                 /*
-                   =========================================
-                   SI HAY UNA PLANTA
-                   =========================================
+                   SI EXISTE PLANTA
                 */
 
                 if (planta) {
@@ -971,18 +967,7 @@
 
 
                     /*
-                       ASIGNAR ARCHIVO
-
-                       El archivo debe estar en la misma
-                       carpeta que este HTML.
-
-                       Ejemplo:
-
-                       index.html
-                       planta1.jpg
-                       planta2.jpg
-                       planta3.jpg
-                       ...
+                       ARCHIVO ORIGINAL
                     */
 
                     imagen.src =
@@ -990,7 +975,7 @@
 
 
                     /*
-                       NOMBRE PARA ACCESIBILIDAD
+                       NOMBRE
                     */
 
                     imagen.alt =
@@ -999,7 +984,7 @@
 
                     /*
                        =====================================
-                       HOVER: ENTRAR
+                       AL PASAR EL CURSOR
                        =====================================
                     */
 
@@ -1026,7 +1011,7 @@
 
                     /*
                        =====================================
-                       HOVER: SALIR
+                       AL SALIR
                        =====================================
                     */
 
@@ -1034,10 +1019,6 @@
                         "mouseleave",
                         function() {
 
-
-                            /*
-                               OCULTAR NOMBRE
-                            */
 
                             nombrePlanta.classList.remove(
                                 "visible"
@@ -1048,9 +1029,7 @@
 
 
                     /*
-                       =====================================
-                       AÑADIR IMAGEN A CASILLA
-                       =====================================
+                       AÑADIR IMAGEN
                     */
 
                     casilla.appendChild(
@@ -1061,9 +1040,7 @@
 
 
                 /*
-                   =========================================
-                   AÑADIR CASILLA A LA CUADRÍCULA
-                   =========================================
+                   AÑADIR CASILLA
                 */
 
                 jardinGrid.appendChild(
