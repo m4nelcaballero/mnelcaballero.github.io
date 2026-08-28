@@ -103,8 +103,11 @@
             height: 100vh;
 
             padding-top: 70px;
+
             padding-right: 20px;
+
             padding-bottom: 20px;
+
             padding-left: 230px;
 
             overflow: hidden;
@@ -156,6 +159,7 @@
         .galeria {
 
             width: 100%;
+
             height: 100%;
 
             text-align: center;
@@ -204,10 +208,11 @@
         .jardin-contenedor {
 
             /*
-               El jardín es cuadrado.
+               El jardín utiliza el máximo espacio posible
+               sin salirse de la pantalla.
 
-               Se calcula automáticamente para que quepa
-               completamente dentro de la pantalla.
+               Dejamos espacio para el menú lateral
+               y un pequeño margen superior/inferior.
             */
 
             width: min(
@@ -236,14 +241,22 @@
 
             display: grid;
 
+            /*
+               EXACTAMENTE 10 COLUMNAS
+            */
+
             grid-template-columns:
                 repeat(10, 1fr);
+
+            /*
+               EXACTAMENTE 10 FILAS
+            */
 
             grid-template-rows:
                 repeat(10, 1fr);
 
             /*
-               SIN SEPARACIÓN ENTRE CASILLAS
+               SIN ESPACIO ENTRE IMÁGENES
             */
 
             gap: 0;
@@ -280,17 +293,27 @@
         .casilla-planta img {
 
             /*
-               Todas las imágenes se convierten visualmente
-               en cuadrados.
+               TODAS LAS IMÁGENES OCUPAN UN CUADRADO.
 
-               El archivo original puede ser vertical,
-               horizontal o cuadrado.
+               No importa si el archivo original es:
+
+               - horizontal
+               - vertical
+               - cuadrado
+               - muy grande
+               - muy pequeño
+
+               El navegador lo adapta.
             */
 
             display: block;
 
             width: 100%;
             height: 100%;
+
+            /*
+               RECORTA LA IMAGEN PARA QUE SEA CUADRADA
+            */
 
             object-fit: cover;
 
@@ -308,7 +331,7 @@
 
 
         /* =====================================================
-           EFECTO AL PASAR EL CURSOR
+           HOVER DE LAS IMÁGENES
            ===================================================== */
 
         .casilla-planta img:hover {
@@ -326,10 +349,9 @@
         .nombre-planta {
 
             /*
-               El nombre queda fuera de la cuadrícula.
+               El nombre está fuera de la cuadrícula.
 
-               Al ser position:absolute no modifica
-               el tamaño del jardín.
+               Es ABSOLUTO para que no mueva el jardín.
             */
 
             position: absolute;
@@ -380,6 +402,7 @@
             nav {
 
                 top: 15px;
+
                 left: 10px;
 
                 width: 130px;
@@ -395,8 +418,11 @@
             main {
 
                 padding-top: 105px;
+
                 padding-right: 10px;
+
                 padding-bottom: 10px;
+
                 padding-left: 10px;
             }
 
@@ -589,7 +615,10 @@
 
             <div class="jardin-contenedor">
 
-                <!-- CUADRÍCULA 10 × 10 -->
+
+                <!-- =================================================
+                     CUADRÍCULA 10 × 10
+                     ================================================= -->
 
                 <div
                     id="jardinGrid"
@@ -597,12 +626,15 @@
                 </div>
 
 
-                <!-- NOMBRE DE LA PLANTA -->
+                <!-- =================================================
+                     NOMBRE DE LA PLANTA
+                     ================================================= -->
 
                 <div
                     id="nombrePlanta"
                     class="nombre-planta">
                 </div>
+
 
             </div>
 
@@ -654,27 +686,22 @@
 
            IMPORTANTE:
 
-           SOLO EXISTEN PLANTA1 HASTA PLANTA17.
+           Las coordenadas funcionan así:
 
-           Sistema de coordenadas:
+                 10   10   10   10
+                  ↑
+                  │
+                  │
+                  │
+                  1
 
-                  10 ┌──────────────────────┐
-                  9  │                      │
-                  8  │                      │
-                  7  │                      │
-                  6  │                      │
-                  5  │                      │
-                  4  │                      │
-                  3  │                      │
-                  2  │                      │
-                  1  └──────────────────────┘
+           (1,1)  = ABAJO A LA IZQUIERDA
 
-                     1  2  3  4 ...       10
+           (1,10) = ABAJO A LA DERECHA
 
-           (1,1)  = abajo izquierda
-           (1,10) = abajo derecha
-           (10,1) = arriba izquierda
-           (10,10)= arriba derecha
+           (10,1) = ARRIBA A LA IZQUIERDA
+
+           (10,10)= ARRIBA A LA DERECHA
 
         ================================================= */
 
@@ -833,6 +860,48 @@
                 nombre: "geranio (Pelargonium hortorum)",
                 fila: 2,
                 columna: 4
+            },
+
+            {
+                imagen: "planta23.jpg",
+                nombre: "Nombre de la planta 23",
+                fila: 9,
+                columna: 5
+            },
+
+            {
+                imagen: "planta24.jpg",
+                nombre: "Nombre de la planta 24",
+                fila: 9,
+                columna: 8
+            },
+
+            {
+                imagen: "planta25.jpg",
+                nombre: "Nombre de la planta 25",
+                fila: 10,
+                columna: 2
+            },
+
+            {
+                imagen: "planta26.jpg",
+                nombre: "Nombre de la planta 26",
+                fila: 10,
+                columna: 3
+            },
+
+            {
+                imagen: "planta27.jpg",
+                nombre: "Nombre de la planta 27",
+                fila: 10,
+                columna: 8
+            },
+
+            {
+                imagen: "planta28.jpg",
+                nombre: "Nombre de la planta 28",
+                fila: 10,
+                columna: 9
             }
 
         ];
@@ -840,7 +909,7 @@
 
 
         /* =================================================
-           CREAR EL JARDÍN
+           CREAR LA CUADRÍCULA
            ================================================= */
 
         const jardinGrid =
@@ -852,13 +921,26 @@
 
 
         /*
-           CREAMOS LAS FILAS DESDE LA 10 HASTA LA 1.
+           =================================================
+           IMPORTANTE
 
-           Esto es lo que hace que:
+           Creamos las filas en este orden:
 
-           fila 10 = arriba
-           fila 1  = abajo
+           10
+           9
+           8
+           7
+           6
+           5
+           4
+           3
+           2
+           1
+
+           Por eso la fila 1 termina visualmente abajo.
+           =================================================
         */
+
 
         for (
             let fila = 10;
@@ -868,7 +950,7 @@
 
 
             /*
-               Las columnas siguen el orden normal:
+               Columnas:
 
                1 → izquierda
                10 → derecha
@@ -895,7 +977,7 @@
 
 
                 /* =========================================
-                   BUSCAR LA PLANTA
+                   BUSCAR PLANTA
                    ========================================= */
 
                 const planta =
@@ -910,7 +992,7 @@
 
 
                 /* =========================================
-                   SI HAY UNA PLANTA
+                   SI EXISTE UNA PLANTA
                    ========================================= */
 
                 if (planta) {
@@ -925,14 +1007,14 @@
 
 
                     /*
-                       CARGAR ARCHIVO
+                       ARCHIVO DE IMAGEN
 
-                       Solo se utilizan:
+                       Ejemplo:
 
                        planta1.jpg
                        planta2.jpg
-                       ...
-                       planta17.jpg
+                       planta3.jpg
+                       etc.
                     */
 
                     imagen.src =
@@ -949,7 +1031,7 @@
 
                     /*
                        =====================================
-                       AL ENTRAR EL CURSOR
+                       PASAR EL CURSOR ENCIMA
                        =====================================
                     */
 
@@ -970,7 +1052,7 @@
 
                     /*
                        =====================================
-                       AL SALIR EL CURSOR
+                       SACAR EL CURSOR
                        =====================================
                     */
 
@@ -987,7 +1069,9 @@
 
 
                     /*
+                       =====================================
                        AÑADIR IMAGEN
+                       =====================================
                     */
 
                     casilla.appendChild(
